@@ -1,0 +1,15 @@
+from flask import Flask, jsonify
+from db_setup import db, ConfigData, app as flask_app
+from config_parser import parse_and_store_config
+import os
+
+@flask_app.route('/configs', methods=['GET'])
+def get_configs():
+    all_data = ConfigData.query.all()
+    output = {entry.section: entry.config_json for entry in all_data}
+    return jsonify(output)
+
+if __name__ == '__main__':
+    config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+    parse_and_store_config(config_path)
+    flask_app.run(debug=True)
