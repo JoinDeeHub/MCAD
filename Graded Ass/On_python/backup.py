@@ -29,7 +29,7 @@ def backup_files(source_dir, dest_dir):
                 new_file_name = f"{name}_{timestamp}{ext}"
                 dest_path = os.path.join(dest_dir, new_file_name)
 
-            try:
+            try:# Copy the file to the destination directory
                 shutil.copy2(source_path, dest_path)
                 print(f"Copied: {file_name} -> {os.path.basename(dest_path)}")
             except Exception as e:

@@ -3,13 +3,23 @@ from db_setup import db, ConfigData, app as flask_app
 from config_parser import parse_and_store_config
 import os
 
+# Initialize Flask app
 @flask_app.route('/configs', methods=['GET'])
 def get_configs():
+    """
+    Endpoint to retrieve all configuration data from the database.
+    Returns a JSON object with section names as keys and their corresponding config_json as values.
+    """
+    # Query all configuration data from the database
     all_data = ConfigData.query.all()
+    
+    # Prepare the output dictionary
     output = {entry.section: entry.config_json for entry in all_data}
+    
+    # Return the output as a JSON response
     return jsonify(output)
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
     parse_and_store_config(config_path)
     flask_app.run(debug=True)

@@ -25,7 +25,8 @@ def monitor_cpu(threshold=CPU_THRESHOLD, interval=CHECK_INTERVAL):
                 print(f" CPU usage is normal: {cpu_usage}%")
                 
             time.sleep(interval)
-    
+            
+    # Handle keyboard interruption gracefully
     except KeyboardInterrupt:
         print("\n Monitoring stopped by user.")
     
