@@ -1,0 +1,1 @@
+print("Hello, World! You are able to run this Python application inside a Docker container.")

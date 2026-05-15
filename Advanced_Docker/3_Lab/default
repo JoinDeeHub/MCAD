@@ -1,0 +1,15 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        # try_files will serve the requested file if present,
+        # otherwise fall back to index.html (useful for single-page apps too)
+        try_files $uri $uri/ /index.html;
+    }
+}
